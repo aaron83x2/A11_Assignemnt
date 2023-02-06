@@ -78,6 +78,11 @@ public class PicrossFrame extends JFrame implements ActionListener {
     int seconds;
 
     /**
+     * The Title;
+     */
+    JLabel title;
+
+    /**
      * Instantiates and creates a new Picross frame using java swing and awt.
      * @param picross_game the picross game
      */
@@ -89,7 +94,7 @@ public class PicrossFrame extends JFrame implements ActionListener {
         this.setTitle("Picross");
         this.setVisible(true);
 
-        this.setExtendedState(this.MAXIMIZED_BOTH);
+//        this.setExtendedState(this.MAXIMIZED_BOTH);
 
         //Left panel numbers
         nums[1] = new JTextField();
@@ -235,6 +240,16 @@ public class PicrossFrame extends JFrame implements ActionListener {
         rightPanel.setBounds(500,145, 140,300);
         this.add(rightPanel);
 
+
+        //Title
+        title = new JLabel();
+        title.setBackground(Color.GRAY);
+        title.setBounds(180,445, 320,55);
+        title.setIcon(new ImageIcon("src//picrossLogo.png"));
+        title.setHorizontalAlignment(JLabel.CENTER);
+        this.add(title);
+
+
         //Bottom Panel
         bottomPanel = new JPanel();
         bottomPanel.setBackground(Color.GRAY);
@@ -305,19 +320,21 @@ public class PicrossFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        //If the check button is pressed
         if(e.getSource() == check){
             historyArea.setText("Check Clicked");
         }
-
+        //If the menu button is pressed
         if(e.getSource() == menu){
             historyArea.setText("Menu Clicked");
         }
 
+        //If the reset button is pressed
         if(e.getSource() == reset){
             historyArea.setText("Reset");
             col = 1;
             row = 1;
-
+            //All button colors reset back to white
             for(int i = 0; i<gridSize;i++){
                 buttons[i].setBackground(Color.WHITE);
             }
@@ -325,14 +342,10 @@ public class PicrossFrame extends JFrame implements ActionListener {
             for(int i = 0; i<gridSize;i++) {
                 if (e.getSource() == buttons[i]) {
 
+                    //Light Button at index i Cyan
                         buttons[i].setBackground(Color.CYAN);
                         row = (i+1);
-                        historyArea.setText("Pos: "+String.valueOf(col));
-//                                +","+String.valueOf(row));
-                        if(row >=5){
-                            row=0;
-                        }
-;
+//                        historyArea.setText("Pos: "+String.valueOf(col));
 
                 }
             }
