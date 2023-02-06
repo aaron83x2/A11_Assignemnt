@@ -1,42 +1,86 @@
-package Assignment2;
-
-import kotlin.reflect.jvm.internal.impl.resolve.constants.StringValue;
+package A12;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Time;
 
+/**
+ * The type Picross frame.
+ */
 public class PicrossFrame extends JFrame implements ActionListener {
 
-    //Panels around the grid
+    /**
+     * Panels Around the grid
+     */
     JPanel topPanel, bottomPanel, rightPanel, leftPanel, pointsPanel;
 
-    //Numbers
+    /**
+     * The Nums.
+     */
     JTextField[] nums = new JTextField[11];
 
-    //Grid
+    /**
+     * The Grid size.
+     */
     int gridSize = 25;
+    /**
+     * The Button panel.
+     */
     JPanel buttonPanel;
+    /**
+     * The Buttons.
+     */
     JButton[] buttons = new JButton[gridSize];
-    int col = 1, row = 0; //Row Right //Col down
+    /**
+     * The Col.
+     */
+    int col = 1, /**
+     * The Row.
+     */
+    row = 0; //Row Right //Col down
 
-    // Menu, Check, Reset
-    JButton menu, check, reset;
+    /**
+     * The Menu.
+     */
+// Menu, Check, Reset
+    JButton menu, /**
+     * The Check.
+     */
+    check, /**
+     * The Reset.
+     */
+    reset;
 
-    //Points
+    /**
+     * The Points title.
+     */
     JTextField pointsTitle;
+    /**
+     * The Counter.
+     */
     JTextField counter;
-
-    //History
+    /**
+     * The History area.
+     */
     JTextArea historyArea;
-
-    //Timer
+    /**
+     * The Timer.
+     */
     JTextField timer;
+    /**
+     * The Time count.
+     */
     JTextField timeCount;
+    /**
+     * The Seconds.
+     */
     int seconds;
 
+    /**
+     * Instantiates and creates a new Picross frame using java swing and awt.
+     * @param picross_game the picross game
+     */
     PicrossFrame(String picross_game){
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Exit when window is closed
@@ -46,7 +90,6 @@ public class PicrossFrame extends JFrame implements ActionListener {
         this.setVisible(true);
 
         this.setExtendedState(this.MAXIMIZED_BOTH);
-
 
         //Left panel numbers
         nums[1] = new JTextField();
@@ -251,6 +294,10 @@ public class PicrossFrame extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * Main Class to .
+     * @param args the args
+     */
     public static void main(String[]args){
         PicrossFrame frame = new PicrossFrame("Picross Game");
     }

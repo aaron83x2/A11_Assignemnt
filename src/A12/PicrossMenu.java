@@ -1,4 +1,4 @@
-package Assignment2;
+package A12;
 
 
 import javax.swing.*;
@@ -7,11 +7,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
+/**
+ * The type Picross menu.
+ */
 public class PicrossMenu extends JFrame implements ActionListener {
 
 
-
-
+    /**
+     * Instantiates a new Picross menu.
+     */
     PicrossMenu(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new FlowLayout());
