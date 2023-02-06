@@ -94,7 +94,6 @@ public class PicrossFrame extends JFrame implements ActionListener {
         this.setTitle("Picross");
         this.setVisible(true);
 
-//        this.setExtendedState(this.MAXIMIZED_BOTH);
 
         //Left panel numbers
         nums[1] = new JTextField();
@@ -345,7 +344,7 @@ public class PicrossFrame extends JFrame implements ActionListener {
                     //Light Button at index i Cyan
                         buttons[i].setBackground(Color.CYAN);
                         row = (i+1);
-//                        historyArea.setText("Pos: "+String.valueOf(col));
+                        historyArea.setText("Pos: "+ col);
 
                 }
             }
