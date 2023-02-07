@@ -33,25 +33,18 @@ public class PicrossFrame extends JFrame implements ActionListener {
      */
     JButton[] buttons = new JButton[gridSize];
     /**
-     * The Col.
+     * The Column and Row.
      */
-    int col = 1, /**
-     * The Row.
-     */
-    row = 0; //Row Right //Col down
+    int col = 0, row = 0, pos;
 
     /**
      * The Menu.
      */
-// Menu, Check, Reset
-    JButton menu, /**
-     * The Check.
-     */
-    check, /**
-     * The Reset.
-     */
-    reset;
 
+    /**
+     * The Side Buttons
+     */
+    JButton menu, check, reset;
     /**
      * The Points title.
      */
@@ -212,7 +205,6 @@ public class PicrossFrame extends JFrame implements ActionListener {
         historyArea = new JTextArea();
         historyArea.setBounds(510,155, 119,225);
         historyArea.setEditable(false);
-        historyArea.setText("Text");
         historyArea.append("\n");
         this.add(historyArea);
 
@@ -325,26 +317,27 @@ public class PicrossFrame extends JFrame implements ActionListener {
         }
         //If the menu button is pressed
         if(e.getSource() == menu){
-            historyArea.setText("Menu Clicked");
+            PicrossMenu menu = new PicrossMenu();
+            this.setVisible(false);
         }
 
         //If the reset button is pressed
         if(e.getSource() == reset){
             historyArea.setText("Reset");
-            col = 1;
-            row = 1;
+
             //All button colors reset back to white
             for(int i = 0; i<gridSize;i++){
                 buttons[i].setBackground(Color.WHITE);
             }
         }
+
+
             for(int i = 0; i<gridSize;i++) {
                 if (e.getSource() == buttons[i]) {
-
                     //Light Button at index i Cyan
+                    pos = (i+1);
                         buttons[i].setBackground(Color.CYAN);
-                        row = (i+1);
-                        historyArea.setText("Pos: "+ col);
+                        historyArea.setText("Pos: "+ pos);
 
                 }
             }
