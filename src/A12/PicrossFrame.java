@@ -5,341 +5,206 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 /**
  * The type Picross frame.
  */
 public class PicrossFrame extends JFrame implements ActionListener {
 
     /**
-     * Panels Around the grid
+     * The Col.
      */
-    JPanel topPanel, bottomPanel, rightPanel, leftPanel, pointsPanel;
-
+    int col = 5;
     /**
-     * The Nums.
+     * The Row.
      */
-    JTextField[] nums = new JTextField[11];
-
+    int row = 5;
     /**
      * The Grid size.
      */
     int gridSize = 25;
     /**
-     * The Button panel.
-     */
-    JPanel buttonPanel;
-    /**
      * The Buttons.
      */
-    JButton[] buttons = new JButton[gridSize];
+    JButton buttons[] = new JButton[gridSize];
     /**
-     * The Column and Row.
+     * The Mark.
      */
-    int col = 0, row = 0, pos;
-
+    Checkbox mark;
+    /**
+     * The Nums.
+     */
+    JTextField[] nums = new JTextField[10];
     /**
      * The Menu.
      */
-
-    /**
-     * The Side Buttons
+    JButton menu, /**
+     * The Reset.
      */
-    JButton menu, check, reset;
-    /**
-     * The Points title.
-     */
-    JTextField pointsTitle;
-    /**
-     * The Counter.
-     */
-    JTextField counter;
+    reset;
     /**
      * The History area.
      */
     JTextArea historyArea;
-    /**
-     * The Timer.
-     */
-    JTextField timer;
-    /**
-     * The Time count.
-     */
-    JTextField timeCount;
-    /**
-     * The Seconds.
-     */
-    int seconds;
+
 
     /**
-     * The Title;
+     * Instantiates a new Picross frame.
      */
-    JLabel title;
+    public PicrossFrame(){
 
-    /**
-     * Instantiates and creates a new Picross frame using java swing and awt.
-     * @param picross_game the picross game
-     */
-    PicrossFrame(String picross_game){
-
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Exit when window is closed
-        this.setLayout(null);
-        this.setBounds(950,250,800,670);
-        this.setTitle("Picross");
+        //Window
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
+        this.setSize(1000,700);
+        this.setLayout(new BorderLayout());
         this.setVisible(true);
 
 
-        //Left panel numbers
-        nums[1] = new JTextField();
-        nums[1].setEditable(false);
-        nums[1].setText("(1)");
-        nums[1].setHorizontalAlignment(JTextField.CENTER);
-        nums[1].setBounds(90,145, 90,55);
-        nums[1].setBackground(Color.GRAY);
-        nums[1].setBorder(null);
-        this.add(nums[1]);
+        //Left Side
+        JPanel left = new JPanel();
+        left.setPreferredSize(new Dimension(142,100));
+        left.setLayout(new GridLayout(5,1));
 
-        nums[2] = new JTextField();
-        nums[2].setEditable(false);
-        nums[2].setText("(1)");
-        nums[2].setHorizontalAlignment(JTextField.CENTER);
-        nums[2].setBounds(90,200,90,55);
-        nums[2].setBackground(Color.GRAY);
-        nums[2].setBorder(null);
-        this.add(nums[2]);
 
-        nums[3] = new JTextField();
-        nums[3].setEditable(false);
-        nums[3].setText("(2)");
-        nums[3].setHorizontalAlignment(JTextField.CENTER);
-        nums[3].setBounds(90,260,90,55);
-        nums[3].setBackground(Color.GRAY);
-        nums[3].setBorder(null);
-        this.add(nums[3]);
+        for(int  i = 0; i<5;i++){
+            nums[i] = new JTextField();
+            nums[i].setEditable(false);
+            nums[i].setText("(1)");
+            nums[i].setHorizontalAlignment(JTextField.CENTER);
+            nums[i].setBorder(null);
+            left.add(nums[i]);
+        }
+        //West Panel
+        this.add(left, BorderLayout.WEST);
 
-        nums[4] = new JTextField();
-        nums[4].setEditable(false);
-        nums[4].setText("(2)");
-        nums[4].setHorizontalAlignment(JTextField.CENTER);
-        nums[4].setBounds(90,320,90,55);
-        nums[4].setBackground(Color.GRAY);
-        nums[4].setBorder(null);
-        this.add(nums[4]);
+        //Top
+        JPanel top = new JPanel();
+        top.setPreferredSize(new Dimension(100,100));
+        top.setLayout(new GridLayout(1,col));
 
-        nums[5] = new JTextField();
-        nums[5].setEditable(false);
-        nums[5].setText("(1 1)");
-        nums[5].setHorizontalAlignment(JTextField.CENTER);
-        nums[5].setBounds(90,385,90,55);
-        nums[5].setBackground(Color.GRAY);
-        nums[5].setBorder(null);
-        this.add(nums[5]);
+        //Mark Checkbox
+        mark = new Checkbox("Mark");
+        mark.setSize(100,100);
+        mark.setBackground(Color.WHITE);
+        top.add(mark);
 
-        //Top Panel Numbers
-        nums[6] = new JTextField();
-        nums[6].setEditable(false);
-        nums[6].setText("(3)");
-        nums[6].setHorizontalAlignment(JTextField.CENTER);
-        nums[6].setBounds(180,90, 65,55);
-        nums[6].setBackground(Color.GRAY);
-        nums[6].setBorder(null);
-        this.add(nums[6]);
 
-        nums[7] = new JTextField();
-        nums[7].setEditable(false);
-        nums[7].setText("(1)");
-        nums[7].setHorizontalAlignment(JTextField.CENTER);
-        nums[7].setBounds(245,90, 65,55);
-        nums[7].setBackground(Color.GRAY);
-        nums[7].setBorder(null);
-        this.add(nums[7]);
+        for(int i = 0; i<5;i++){
+            nums[i] = new JTextField();
+            nums[i].setEditable(false);
+            nums[i].setText("(1)");
+            nums[i].setHorizontalAlignment(JTextField.CENTER);
+            nums[i].setBorder(null);
+            top.add(nums[i]);
+        }
 
-        nums[8] = new JTextField();
-        nums[8].setEditable(false);
-        nums[8].setText("(1)");
-        nums[8].setHorizontalAlignment(JTextField.CENTER);
-        nums[8].setBounds(310,90, 65,55);
-        nums[8].setBackground(Color.GRAY);
-        nums[8].setBorder(null);
-        this.add(nums[8]);
+        //Right Side
+        JPanel right = new JPanel();
+        right.setPreferredSize(new Dimension(141,100));
 
-        nums[8] = new JTextField();
-        nums[8].setEditable(false);
-        nums[8].setText("(1)");
-        nums[8].setHorizontalAlignment(JTextField.CENTER);
-        nums[8].setBounds(310,90, 65,55);
-        nums[8].setBackground(Color.GRAY);
-        nums[8].setBorder(null);
-        this.add(nums[8]);
-
-        nums[9] = new JTextField();
-        nums[9].setEditable(false);
-        nums[9].setText("(1)");
-        nums[9].setHorizontalAlignment(JTextField.CENTER);
-        nums[9].setBounds(373,90, 65,55);
-        nums[9].setBackground(Color.GRAY);
-        nums[9].setBorder(null);
-        this.add(nums[9]);
-
-        nums[10] = new JTextField();
-        nums[10].setEditable(false);
-        nums[10].setText("(1)");
-        nums[10].setHorizontalAlignment(JTextField.CENTER);
-        nums[10].setBounds(435,90, 65,55);
-        nums[10].setBackground(Color.GRAY);
-        nums[10].setBorder(null);
-        this.add(nums[10]);
-
-        //Left Panel
-        leftPanel = new JPanel();
-        leftPanel.setBackground(Color.GRAY);
-        leftPanel.setBounds(90,145, 90,300);
-        this.add(leftPanel);
-
-        //Top Panel
-        topPanel = new JPanel();
-        topPanel.setBackground(Color.GRAY);
-        topPanel.setBounds(180,90, 320,55);
-        this.add(topPanel);
-
-        //History Area
+        //History Text Area
         historyArea = new JTextArea();
-        historyArea.setBounds(510,155, 119,225);
+        historyArea.setPreferredSize(new Dimension(120,360));
         historyArea.setEditable(false);
-        historyArea.append("\n");
-        this.add(historyArea);
+        historyArea.setText("History");
+        right.add(historyArea);
 
-        //Timer
-        timer = new JTextField();
-        timer.setBounds(525,400,39,39);
-        timer.setEditable(false);
-        timer.setText("Time: ");
-        timer.setBackground(Color.GRAY);
-        timer.setBorder(null);
-        this.add(timer);
+        //Time
+        JTextArea time = new JTextArea();
+        time.setBackground(Color.WHITE);
+        time.setPreferredSize(new Dimension(100,35));
+        time.setText("Time: " + 0);
+        right.add(time);
 
-        timeCount = new JTextField();
-        timeCount.setBounds(565,400,39,39);
-        timeCount.setEditable(false);
-        timeCount.setText("0" + "s");
-        timeCount.setBackground(Color.WHITE);
-        this.add(timeCount);
+        this.add(right, BorderLayout.EAST);
 
+        //Center Buttons
+        JPanel cnt = new JPanel();
+        cnt.setPreferredSize(new Dimension(100,100));
+        cnt.setBackground(Color.LIGHT_GRAY);
+        cnt.setLayout(new GridLayout(row,col));
 
-        //Right Panel
-        rightPanel = new JPanel();
-        rightPanel.setBackground(Color.GRAY);
-        rightPanel.setBounds(500,145, 140,300);
-        this.add(rightPanel);
-
-
-        //Title
-        title = new JLabel();
-        title.setBackground(Color.GRAY);
-        title.setBounds(180,445, 320,55);
-        title.setIcon(new ImageIcon("src//picrossLogo.png"));
-        title.setHorizontalAlignment(JLabel.CENTER);
-        this.add(title);
-
-
-        //Bottom Panel
-        bottomPanel = new JPanel();
-        bottomPanel.setBackground(Color.GRAY);
-        bottomPanel.setBounds(180,445, 320,55);
-        this.add(bottomPanel);
-
-        //Button Grid - 25 Buttons
-        buttonPanel = new JPanel();
-        buttonPanel.setBounds(180,142,320,300);
-        buttonPanel.setLayout(new GridLayout(5,5));
-
-        for(int i = 0; i< buttons.length;i++){
+        for(int  i = 0; i<25;i++){
             buttons[i] = new JButton();
-            buttons[i].setBackground(Color.WHITE);
             buttons[i].addActionListener(this);
             buttons[i].setFocusable(false);
-            buttonPanel.add(buttons[i]);
+            cnt.add(buttons[i]);
         }
-        this.add(buttonPanel);
+        this.add(cnt,BorderLayout.CENTER);
 
-        //Check button
-        check = new JButton();
-        check.setText("Check");
-        check.setBounds(90,90,90,55);
-        check.addActionListener(this);
-        this.add(check);
+        JTextField pointsTitle = new JTextField();
+        pointsTitle.setBorder(null);
+        pointsTitle.setEditable(false);
+        pointsTitle.setBackground(Color.LIGHT_GRAY);
+        pointsTitle.setText("Points: " + 0);
+        top.add(pointsTitle);
+
+        this.add(top,BorderLayout.NORTH);
+
+        //Bottom Panel
+        JPanel bottom = new JPanel();
+        bottom.setPreferredSize(new Dimension(100,100));
+        bottom.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         //Menu Button
-        menu = new JButton();
-        menu.setText("Menu");
-        menu.setBounds(90,445,90,55);
+        menu  = new JButton();
         menu.addActionListener(this);
-        this.add(menu);
+        menu.setText("Menu");
+        menu.setPreferredSize(new Dimension(140,50));
+        bottom.add(menu);
+
+        //Picross Logo
+        JLabel image  = new JLabel();
+        image.setBackground(Color.ORANGE);
+        image.setIcon(new ImageIcon("src//picrossLogo.png"));
+        image.setHorizontalAlignment(JLabel.CENTER);
+        image.setPreferredSize(new Dimension(695,50));
+        bottom.add(image);
 
         //Reset Button
         reset = new JButton();
         reset.setText("Reset");
-        reset.setBounds(525,450,90,45);
         reset.addActionListener(this);
-        this.add(reset);
+        reset.setPreferredSize(new Dimension(120,50));
+        bottom.add(reset);
+        this.add(bottom, BorderLayout.SOUTH);
 
-        //Points Counter
-        counter = new JTextField();
-        counter.setBounds(565,90,40,40);
-        counter.setEditable(false);
-        counter.setText("0");
-        this.add(counter);
-
-        //Points Title
-        pointsTitle = new JTextField();
-        pointsTitle.setBounds(525,90,80,39);
-        pointsTitle.setBorder(null);
-        pointsTitle.setEditable(false);
-        pointsTitle.setBackground(Color.GRAY);
-        pointsTitle.setText("Points");
-        this.add(pointsTitle);
 
     }
 
+
     /**
-     * Main Class to .
+     * Main Method Calls itself to open the JFrame.
+     *
      * @param args the args
      */
     public static void main(String[]args){
-        PicrossFrame frame = new PicrossFrame("Picross Game");
+        PicrossFrame main = new PicrossFrame();
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        //If the check button is pressed
-        if(e.getSource() == check){
-            historyArea.setText("Check Clicked");
+        for(int i = 0; i< buttons.length; i++) {
+            if (e.getSource() == buttons[i]) {
+                //Light Button at index i Cyan
+                buttons[i].setBackground(Color.CYAN);
+                historyArea.setText("Selected Square: "+i);
+            }
         }
-        //If the menu button is pressed
-        if(e.getSource() == menu){
-            PicrossMenu menu = new PicrossMenu();
-            this.setVisible(false);
-        }
-
         //If the reset button is pressed
         if(e.getSource() == reset){
-            historyArea.setText("Reset");
-
+            historyArea.setText("Reset Clicked");
             //All button colors reset back to white
             for(int i = 0; i<gridSize;i++){
                 buttons[i].setBackground(Color.WHITE);
             }
         }
-
-
-            for(int i = 0; i<gridSize;i++) {
-                if (e.getSource() == buttons[i]) {
-                    //Light Button at index i Cyan
-                    pos = (i+1);
-                        buttons[i].setBackground(Color.CYAN);
-                        historyArea.setText("Pos: "+ pos);
-
-                }
-            }
+        //If menu option is Selected
+        if(e.getSource() == menu){
+            historyArea.setText("Menu Clicked");
+        }
     }
 }
